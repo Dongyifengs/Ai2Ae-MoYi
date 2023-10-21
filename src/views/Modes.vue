@@ -1,0 +1,111 @@
+<template>
+  <div class="home">
+
+    <div class="ILST" v-if="currentApp === 'ILST'">
+      <div class="tools">
+        <h1>当前正在开发 / 多人协同 / Ai页面才能显示</h1>
+        <div class="youIP">
+          <span>当前设备IP：{{ YouLocaIP }}</span><br>
+          <div style="margin-top: 5px;">
+            <el-input placeholder="请输入IP地址" class="input-with-select">
+              <el-button slot="append" onclick="LianJie()">连接</el-button>
+            </el-input>
+          </div>
+        </div>
+        <el-button type="primary">导入到对方Ae中<i class="el-icon-upload el-icon--right"></i></el-button>
+        <el-button type="primary">从对方Ae传回Ai数据<i class="el-icon-download el-icon--right"></i></el-button>
+        <el-button type="primary">导入设置<i class="el-icon-setting el-icon--right"></i></el-button>
+      </div>
+
+    </div>
+    <div class="AEFT" v-if="currentApp === 'AEFT'">
+      <div class="tools">
+        <h1>当前正在开发 / 多人协同 / Ae页面正常显示</h1>
+        <div class="youIP">
+          <span>当前设备IP：{{ YouLocaIP }}</span><br>
+          <div style="margin-top: 5px;">
+            <el-input placeholder="请输入IP地址" class="input-with-select">
+              <el-button slot="append" onclick="LianJie()">连接</el-button>
+            </el-input>
+          </div>
+        </div>
+        <el-button type="primary">导入到对方Ae中<i class="el-icon-upload el-icon--right"></i></el-button>
+        <el-button type="primary">从对方Ae传回Ai数据<i class="el-icon-download el-icon--right"></i></el-button>
+        <el-button type="primary">导入设置<i class="el-icon-setting el-icon--right"></i></el-button>
+      </div>
+
+
+    </div>
+  </div>
+</template>
+
+<script>
+
+export default {
+  data() {
+    return {
+      adobeAppName: '未知应用',
+      adobeAppId: '未知ID',
+      adobeAppLocale: '未知语言',
+      adobeAppVersion: '未知版本',
+      currentApp: '未知版本',
+      YouLocaIP: '正在获取IP地址.....'
+    };
+  },
+  mounted() {
+    this.detectApplication();
+    this.getLocalIP();
+  },
+  methods: {
+    detectApplication() {
+      /* global CSInterface */
+      const csInterface = new CSInterface();
+      const hostEnv = csInterface.hostEnvironment;
+
+      if (hostEnv) {
+        // 判断应用名称
+        if (hostEnv.appName === "AEFT") {
+          this.adobeAppName = "当前应用是 After Effects";
+          this.currentApp = "AEFT";
+        } else if (hostEnv.appName === "ILST") {
+          this.adobeAppName = "当前应用是 Illustrator";
+          this.currentApp = "ILST";
+        }
+
+        // 赋值AppId
+        if (hostEnv.appId) {
+          this.adobeAppId = hostEnv.appId;
+        }
+
+        // 赋值AppLocale
+        if (hostEnv.appLocale) {
+          this.adobeAppLocale = hostEnv.appLocale;
+        }
+
+        // 赋值AppVersion
+        if (hostEnv.appVersion) {
+          this.adobeAppVersion = hostEnv.appVersion;
+        }
+      }
+    },
+    getLocalIP() {
+      const pc = new RTCPeerConnection({iceServers: []});
+      pc.createDataChannel('');
+      pc.createOffer().then(pc.setLocalDescription.bind(pc));
+
+      pc.onicecandidate = (ice) => {
+        if (!ice || !ice.candidate || !ice.candidate.candidate) {
+          return;
+        }
+
+        const matches = ice.candidate.candidate.match(/([0-9]{1,3}(\.[0-9]{1,3}){3}|([a-f0-9]{1,4}:){7}[a-f0-9]{1,4})/);
+
+        if (matches) {
+          this.YouLocaIP = matches[0];
+        }
+        pc.onicecandidate = null;
+      };
+    }
+  }
+}
+</script>

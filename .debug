@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExtensionList>
+    <Extension Id="com.ai2ae-moyi.panel">
+        <HostList>
+            <Host Name="ILST" Port="8888" />
+            <Host Name="AEFT" Port="8889" />
+        </HostList>
+    </Extension>
+</ExtensionList>
