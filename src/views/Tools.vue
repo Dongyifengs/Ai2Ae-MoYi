@@ -1,27 +1,34 @@
 <template>
   <div class="home">
 
-    <!--当前是ai窗口-->
-    <div class="ILST" v-if="currentApp === 'ILST'">
+    <!--Ai面板内容-->
+    <div v-if="currentApp === 'ILST'" class="ILST">
       <div class="tools">
         <h1>当前正在开发 / 工具 / Ai页面才能显示</h1>
-        <el-button type="primary">导入到Ae中<i class="el-icon-upload el-icon--right"></i></el-button>
-        <el-button type="primary">从Ae传回Ai数据<i class="el-icon-download el-icon--right"></i></el-button>
-        <el-button type="primary" @click="ceshi()">测试</el-button>
-        <el-button type="primary" @click="copyToAE()">测试1</el-button>
+        <el-tooltip content="上传到Ae" placement="top">
+          <el-button type="primary" size="small" icon="el-icon-upload2" @click="CopyToAe()"/>
+        </el-tooltip>
+        <el-button type="primary" size="small" icon="el-icon-upload2" @click="Test()">测试</el-button>
+        <el-tooltip content="从Ae从传回" placement="top">
+          <el-button type="primary" size="small" icon="el-icon-download" @click="CopyAeToAi()"/>
+        </el-tooltip>
       </div>
     </div>
 
-    <!--当前是ae窗口-->
-    <div class="AEFT" v-if="currentApp === 'AEFT'">
+    <!--Ae面板内容-->
+    <div v-if="currentApp === 'AEFT'" class="AEFT">
       <div class="tools">
         <h1>当前正在开发 / 工具 / Ae页面正常显示</h1>
-        <el-button type="primary">导入到Ai中<i class="el-icon-upload el-icon--right"></i></el-button>
-        <el-button type="primary">从Ai传回Ae数据<i class="el-icon-download el-icon--right"></i></el-button>
+        <el-tooltip content="上传到Ai" placement="top">
+          <el-button type="primary" size="small" icon="el-icon-upload2"/>
+        </el-tooltip>
+        <el-tooltip content="从Ai从传回" placement="top">
+          <el-button type="primary" size="small" icon="el-icon-download"/>
+        </el-tooltip>
       </div>
     </div>
 
-    <!--log窗口 测试使用 -->
+    <!--Log面板内容-->
     <div class="log">
       <span>当前应用: {{ adobeAppName }}</span><br>
       <span>当前ID: {{ adobeAppId }}</span><br>
@@ -30,12 +37,10 @@
       <span>当前IP: {{ YouLocaIP }}</span><br>
     </div>
 
-
   </div>
 </template>
 
 <script>
-/* global CSInterface */
 export default {
   data() {
     return {
@@ -52,104 +57,70 @@ export default {
     this.getLocalIP();
   },
   methods: {
+    // 获取面板属性
     detectApplication() {
       const csInterface = new CSInterface();
       const hostEnv = csInterface.hostEnvironment;
-
       if (hostEnv) {
-        // 判断应用名称
-        if (hostEnv.appName === "AEFT") {
-          this.adobeAppName = "当前应用是 After Effects";
-          this.currentApp = "AEFT";
-        } else if (hostEnv.appName === "ILST") {
-          this.adobeAppName = "当前应用是 Illustrator";
-          this.currentApp = "ILST";
-        }
-
-        // 赋值AppId
-        if (hostEnv.appId) {
-          this.adobeAppId = hostEnv.appId;
-        }
-
-        // 赋值AppLocale
-        if (hostEnv.appLocale) {
-          this.adobeAppLocale = hostEnv.appLocale;
-        }
-
-        // 赋值AppVersion
-        if (hostEnv.appVersion) {
-          this.adobeAppVersion = hostEnv.appVersion;
-        }
+        this.adobeAppName = hostEnv.appName === "AEFT" ? "当前应用是 After Effects" : "当前应用是 Illustrator";
+        this.currentApp = hostEnv.appName;
+        this.adobeAppId = hostEnv.appId || '未知ID';
+        this.adobeAppLocale = hostEnv.appLocale || '未知语言';
+        this.adobeAppVersion = hostEnv.appVersion || '未知版本';
       }
     },
+
+    // 获取电脑IP
     getLocalIP() {
       const pc = new RTCPeerConnection({iceServers: []});
       pc.createDataChannel('');
-      pc.createOffer().then(pc.setLocalDescription.bind(pc));
-
+      pc.createOffer().then(offer => pc.setLocalDescription(offer));
       pc.onicecandidate = (ice) => {
-        if (!ice || !ice.candidate || !ice.candidate.candidate) {
-          return;
+        if (ice && ice.candidate) {
+          const matches = ice.candidate.candidate.match(/([0-9]{1,3}(\.[0-9]{1,3}){3}|([a-f0-9]{1,4}:){7}[a-f0-9]{1,4})/);
+          if (matches) this.YouLocaIP = matches[0];
+          pc.onicecandidate = null;
         }
-
-        const matches = ice.candidate.candidate.match(/([0-9]{1,3}(\.[0-9]{1,3}){3}|([a-f0-9]{1,4}:){7}[a-f0-9]{1,4})/);
-
-        if (matches) {
-          this.YouLocaIP = matches[0];
-        }
-        pc.onicecandidate = null;
       };
     },
-    ceshi() {
-      const csInterface = new CSInterface();
-      const script = `
-        if (app.documents.length > 0 && app.activeDocument.selection.length > 0) {
-            var selectedItem = app.activeDocument.selection[0];
-            if (selectedItem.typename === "PathItem") {
-                var pathData = {
-                    anchorPoints: selectedItem.pathPoints, // 获取锚点
-                    fillColor: (selectedItem.fillColor.red + ", " + selectedItem.fillColor.green + ", " + selectedItem.fillColor.blue),
-                    strokeColor: (selectedItem.strokeColor.red + ", " + selectedItem.strokeColor.green + ", " + selectedItem.strokeColor.blue),
-                    strokeWidth: selectedItem.strokeWidth,
-                    filled: selectedItem.filled,
-                    stroked: selectedItem.stroked
-                };
-                return JSON.stringify(pathData);
-            } else {
-                return "Not a PathItem";
-            }
-        } else {
-            return "Nothing selected";
-        }
-    `;
 
-      csInterface.evalScript(script, this.copyToAE);
-      // eslint-disable-next-line no-console
-      console.log(this.copyToAE())
+    // 将路径导入到Ae中
+    CopyToAe() {
+      console.log("CopyToAe()")
     },
-    copyToAE(result) {
-      const pathData = JSON.parse(result);
-      if (!pathData || pathData === "Not a PathItem" || pathData === "Nothing selected") {
-        return;
-      }
 
-      // 使用pathData构建After Effects的ExtendScript脚本来创建新的形状图层
-      // 这只是一个基本示例，实际的脚本可能需要更复杂的处理来适应具体情况
-      const aescript = `
-        var comp = app.project.activeItem;
-        if (comp && comp instanceof CompItem) {
-            var shapeLayer = comp.layers.addShape();
-            // 使用pathData中的锚点、颜色等信息创建新的形状路径
-            // 你需要写更多的代码来处理pathData并在AE中创建适当的路径
-            // 这需要对After Effects scripting API的深入了解
-        }
-    `;
+    // 将Ae路径导入到Ai中
+    CopyAeToAi() {
+      console.log("CopyAeToAi()")
+    },
 
+    // 测试函数
+    Test() {
+      console.log(123)
       const csInterface = new CSInterface();
-      // eslint-disable-next-line no-console
-      console.log(aescript)
-      csInterface.evalScript(aescript);
+      const script = `(function(){
+            const items = app.activeDocument.selection;
+            const results = [];
+            for (var i = 0; i < items.length; i++) {
+                const item = items[i];
+                const attributes = {
+                    透明度: item.opacity, // 透明度: item.opacity
+                    锚点位置: (item.typename === "PathItem" && item.pathPoints.length > 0) ? item.pathPoints[0].anchor.toString() : "N/A", // 锚点位置: 如果是路径项目并且有路径点，则返回第一个路径点的锚点，否则返回"N/A"
+                    边框大小: (item.typename === "PathItem") ? item.strokeWidth : "N/A", // 边框大小: 如果是路径项目，则返回边框的宽度，否则返回"N/A"
+                    边框颜色: (item.typename === "PathItem" && item.strokeColor.typename === "RGBColor") ? "R: " + item.strokeColor.red + " G: " + item.strokeColor.green + " B: " + item.strokeColor.blue : "N/A", // 边框颜色: 如果是路径项目且边框颜色为RGB颜色，则返回RGB颜色值，否则返回"N/A"
+                    路径颜色: (item.typename === "PathItem" && item.fillColor.typename === "RGBColor") ? "R: " + item.fillColor.red + " G: " + item.fillColor.green + " B: " + item.fillColor.blue : "N/A", // 路径颜色: 如果是路径项目且填充颜色为RGB颜色，则返回RGB颜色值，否则返回"N/A"
+                    路径大小: (item.typename === "PathItem") ? item.pathPoints.length : "N/A", // 路径大小: 如果是路径项目，则返回路径点的数量，否则返回"N/A"
+                    路径名称: item.name || "N/A" // 路径名称: 返回项目名称，如果没有则返回"N/A"
+                };
+                results.push(attributes);
+            }
+            return JSON.stringify(results);
+      })()`;
 
+      csInterface.evalScript(script, (result) => {
+        console.log(result)
+        console.log(JSON.parse(result));
+      });
     }
   }
 }
