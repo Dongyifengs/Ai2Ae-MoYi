@@ -7,14 +7,23 @@
         <div class="youIP">
           <span>当前设备IP：{{ YouLocaIP }}</span><br>
           <div style="margin-top: 5px;">
-            <el-input placeholder="请输入IP地址" class="input-with-select">
+            <el-input placeholder="请输入IP地址" class="input-with-select" v-model="YouToIP">
               <el-button slot="append" onclick="LianJie()">连接</el-button>
             </el-input>
           </div>
         </div>
-        <el-button type="primary">导入到对方Ae中<i class="el-icon-upload el-icon--right"></i></el-button>
-        <el-button type="primary">从对方Ae传回Ai数据<i class="el-icon-download el-icon--right"></i></el-button>
-        <el-button type="primary">导入设置<i class="el-icon-setting el-icon--right"></i></el-button>
+        <div class="btn" style="margin-top: 5px">
+          <el-tooltip content="上传到对方Ae" placement="top">
+            <el-button type="primary" size="small" icon="el-icon-upload2"/>
+          </el-tooltip>
+          <el-button type="primary" size="small" icon="el-icon-upload2">测试</el-button>
+          <el-tooltip content="从对方Ae从传回" placement="top">
+            <el-button type="primary" size="small" icon="el-icon-download"/>
+          </el-tooltip>
+          <el-tooltip content="导入设置" placement="top">
+            <el-button type="primary" size="small" icon="el-icon-setting"/>
+          </el-tooltip>
+        </div>
       </div>
 
     </div>
@@ -24,14 +33,23 @@
         <div class="youIP">
           <span>当前设备IP：{{ YouLocaIP }}</span><br>
           <div style="margin-top: 5px;">
-            <el-input placeholder="请输入IP地址" class="input-with-select">
+            <el-input placeholder="请输入IP地址" class="input-with-select" v-model="YouToIP">
               <el-button slot="append" onclick="LianJie()">连接</el-button>
             </el-input>
           </div>
         </div>
-        <el-button type="primary">导入到对方Ae中<i class="el-icon-upload el-icon--right"></i></el-button>
-        <el-button type="primary">从对方Ae传回Ai数据<i class="el-icon-download el-icon--right"></i></el-button>
-        <el-button type="primary">导入设置<i class="el-icon-setting el-icon--right"></i></el-button>
+        <div class="btn" style="margin-top: 5px">
+          <el-tooltip content="上传到对方Ai" placement="top">
+            <el-button type="primary" size="small" icon="el-icon-upload2"/>
+          </el-tooltip>
+          <el-button type="primary" size="small" icon="el-icon-upload2">测试</el-button>
+          <el-tooltip content="从对方Ai从传回" placement="top">
+            <el-button type="primary" size="small" icon="el-icon-download"/>
+          </el-tooltip>
+          <el-tooltip content="导入设置" placement="top">
+            <el-button type="primary" size="small" icon="el-icon-setting"/>
+          </el-tooltip>
+        </div>
       </div>
 
 
@@ -49,7 +67,8 @@ export default {
       adobeAppLocale: '未知语言',
       adobeAppVersion: '未知版本',
       currentApp: '未知版本',
-      YouLocaIP: '正在获取IP地址.....'
+      YouLocaIP: '正在获取IP地址.....',
+      YouToIP: ''
     };
   },
   mounted() {
