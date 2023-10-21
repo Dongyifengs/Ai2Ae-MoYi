@@ -57,7 +57,7 @@ export default {
     this.getLocalIP();
   },
   methods: {
-    // 获取面板属性
+    // TODO 获取面板属性
     detectApplication() {
       const csInterface = new CSInterface();
       const hostEnv = csInterface.hostEnvironment;
@@ -70,7 +70,7 @@ export default {
       }
     },
 
-    // 获取电脑IP
+    // TODO 获取电脑IP地址
     getLocalIP() {
       const pc = new RTCPeerConnection({iceServers: []});
       pc.createDataChannel('');
@@ -84,44 +84,97 @@ export default {
       };
     },
 
-    // 将路径导入到Ae中
+    // TODO 将路径导入到Ae中
     CopyToAe() {
       console.log("CopyToAe()")
     },
 
-    // 将Ae路径导入到Ai中
+    // TODO 将Ae路径导入到Ai中
     CopyAeToAi() {
       console.log("CopyAeToAi()")
     },
 
-    // 测试函数
+
+    // TODO 测试函数
     Test() {
-      console.log(123)
       const csInterface = new CSInterface();
       const script = `(function(){
+
+            // TODO 获取颜色
+            function colorToString(color) {
+                if (color.typename === "CMYKColor") {
+                    var r = 255 * (1 - color.cyan / 100) * (1 - color.black / 100);
+                    var g = 255 * (1 - color.magenta / 100) * (1 - color.black / 100);
+                    var b = 255 * (1 - color.yellow / 100) * (1 - color.black / 100);
+                    return "R: " + Math.round(r) + ", G: " + Math.round(g) + ", B: " + Math.round(b);
+                } else if (color.typename === "GrayColor") {
+                    var rgbVal = 255 * (1 - color.gray / 100);
+                    return "R: " + Math.round(rgbVal) + ", G: " + Math.round(rgbVal) + ", B: " + Math.round(rgbVal);
+                } else if (color.typename === "SpotColor") {
+                    return colorToString(color.spot.color);
+                } else if (color.typename === "GradientColor") {
+                    return "Gradient";
+                } else if (color.typename === "RGBColor") {
+                    return "R: " + Math.round(color.red) + ", G: " + Math.round(color.green) + ", B: " + Math.round(color.blue);
+                } else {
+                    return "N/A";
+                }
+            }
+
+            // TODO 获取渐变
+            function gradientToString(gradientColor) {
+                var stops = [];
+                for (var j = 0; j < gradientColor.gradient.gradientStops.length; j++) {
+                    var stop = gradientColor.gradient.gradientStops[j];
+                    stops.push(colorToString(stop.color) + " (" + stop.rampPoint + "%)");
+                }
+                return stops.join(", ");
+            }
+
+            // TODO 获取路径各个属性
             const items = app.activeDocument.selection;
             const results = [];
             for (var i = 0; i < items.length; i++) {
                 const item = items[i];
                 const attributes = {
-                    透明度: item.opacity, // 透明度: item.opacity
-                    锚点位置: (item.typename === "PathItem" && item.pathPoints.length > 0) ? item.pathPoints[0].anchor.toString() : "N/A", // 锚点位置: 如果是路径项目并且有路径点，则返回第一个路径点的锚点，否则返回"N/A"
-                    边框大小: (item.typename === "PathItem") ? item.strokeWidth : "N/A", // 边框大小: 如果是路径项目，则返回边框的宽度，否则返回"N/A"
-                    边框颜色: (item.typename === "PathItem" && item.strokeColor.typename === "RGBColor") ? "R: " + item.strokeColor.red + " G: " + item.strokeColor.green + " B: " + item.strokeColor.blue : "N/A", // 边框颜色: 如果是路径项目且边框颜色为RGB颜色，则返回RGB颜色值，否则返回"N/A"
-                    路径颜色: (item.typename === "PathItem" && item.fillColor.typename === "RGBColor") ? "R: " + item.fillColor.red + " G: " + item.fillColor.green + " B: " + item.fillColor.blue : "N/A", // 路径颜色: 如果是路径项目且填充颜色为RGB颜色，则返回RGB颜色值，否则返回"N/A"
-                    路径大小: (item.typename === "PathItem") ? item.pathPoints.length : "N/A", // 路径大小: 如果是路径项目，则返回路径点的数量，否则返回"N/A"
-                    路径名称: item.name || "N/A" // 路径名称: 返回项目名称，如果没有则返回"N/A"
+                    透明度: item.opacity,
+                    锚点位置: (item.typename === "PathItem" && item.pathPoints.length > 0) ? item.pathPoints[0].anchor.toString() : "N/A",
+                    边框大小: (item.typename === "PathItem") ? item.strokeWidth : "N/A",
+                    边框颜色: (item.typename === "PathItem") ? colorToString(item.strokeColor) : "N/A",
+                    路径颜色: (item.typename === "PathItem") ? (item.fillColor.typename === "GradientColor" ? gradientToString(item.fillColor) : colorToString(item.fillColor)) : "N/A",
+                    路径大小: (item.typename === "PathItem") ? item.pathPoints.length : "N/A",
+                    路径名称: item.name || "N/A"
                 };
                 results.push(attributes);
             }
             return JSON.stringify(results);
       })()`;
 
+      // TODO 执行脚本
       csInterface.evalScript(script, (result) => {
         console.log(result)
         console.log(JSON.parse(result));
+        if (JSON.parse((result)).length === 0) {
+          this.$message({
+            showClose: true,
+            message: '没有选中路径.',
+            type: 'error',
+            center: true
+          });
+        } else {
+          this.$message({
+            showClose: true,
+            message: '选中了路径.',
+            type: 'success',
+            center: true
+          });
+        }
       });
     }
   }
 }
 </script>
+
+<style scoped>
+
+</style>
