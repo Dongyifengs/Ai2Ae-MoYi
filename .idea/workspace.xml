@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b5e1c9a7-b28f-4b8b-808f-69d8a2b94d3c" name="更改" comment="创建项目&#10;新增`工具`,`多人协同`,`设置`页面&#10;基础框架搭建完成&#10;基本信息获取">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+    <list default="true" id="b5e1c9a7-b28f-4b8b-808f-69d8a2b94d3c" name="更改" comment="修复点击bug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Tools.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Tools.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +74,7 @@
     "node.js.selected.package.standard": "",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "settings.javascript.linters.eslint",
+    "settings.editor.selected.configurable": "actions.on.save",
     "ts.external.directory.path": "C:\\Users\\15459\\AppData\\Local\\Programs\\WebStorm\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   }
@@ -180,7 +176,9 @@
       <workItem from="1697876821315" duration="1508000" />
       <workItem from="1697885314678" duration="3444000" />
       <workItem from="1697888934984" duration="4973000" />
-      <workItem from="1697900300508" duration="5086000" />
+      <workItem from="1697900300508" duration="5128000" />
+      <workItem from="1697909573212" duration="5472000" />
+      <workItem from="1697938709956" duration="4777000" />
     </task>
     <task id="LOCAL-00001" summary="创建项目&#10;新增`工具`,`多人协同`,`设置`页面&#10;基础框架搭建完成&#10;基本信息获取">
       <option name="closed" value="true" />
@@ -190,7 +188,47 @@
       <option name="project" value="LOCAL" />
       <updated>1697893816075</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="添加获取路径的属性">
+      <option name="closed" value="true" />
+      <created>1697905567708</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1697905567708</updated>
+    </task>
+    <task id="LOCAL-00003" summary="添加提示,添加渐变属性获取">
+      <option name="closed" value="true" />
+      <created>1697913637605</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1697913637605</updated>
+    </task>
+    <task id="LOCAL-00004" summary="添加滞留提示,修复Bug">
+      <option name="closed" value="true" />
+      <created>1697913679281</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1697913679281</updated>
+    </task>
+    <task id="LOCAL-00005" summary="添加复制粘贴功能">
+      <option name="closed" value="true" />
+      <created>1697943721142</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1697943721142</updated>
+    </task>
+    <task id="LOCAL-00006" summary="修复点击bug">
+      <option name="closed" value="true" />
+      <created>1697943739855</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1697943739855</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -219,6 +257,11 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="创建项目&#10;新增`工具`,`多人协同`,`设置`页面&#10;基础框架搭建完成&#10;基本信息获取" />
-    <option name="LAST_COMMIT_MESSAGE" value="创建项目&#10;新增`工具`,`多人协同`,`设置`页面&#10;基础框架搭建完成&#10;基本信息获取" />
+    <MESSAGE value="添加获取路径的属性" />
+    <MESSAGE value="添加提示,添加渐变属性获取" />
+    <MESSAGE value="添加滞留提示,修复Bug" />
+    <MESSAGE value="添加复制粘贴功能" />
+    <MESSAGE value="修复点击bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复点击bug" />
   </component>
 </project>
