@@ -8,7 +8,7 @@
           <span>当前设备IP：{{ YouLocaIP }}</span><br>
           <div style="margin-top: 5px;">
             <el-input placeholder="请输入IP地址" class="input-with-select" v-model="YouToIP">
-              <el-button slot="append" onclick="LianJie()">连接</el-button>
+              <el-button slot="append" @click="LianJie()">连接</el-button>
             </el-input>
           </div>
         </div>
@@ -34,7 +34,7 @@
           <span>当前设备IP：{{ YouLocaIP }}</span><br>
           <div style="margin-top: 5px;">
             <el-input placeholder="请输入IP地址" class="input-with-select" v-model="YouToIP">
-              <el-button slot="append" onclick="LianJie()">连接</el-button>
+              <el-button slot="append" @click="LianJie()">连接</el-button>
             </el-input>
           </div>
         </div>
@@ -124,6 +124,9 @@ export default {
         }
         pc.onicecandidate = null;
       };
+    },
+    LianJie() {
+      console.log("连接到：" + this.YouToIP);
     }
   }
 }
