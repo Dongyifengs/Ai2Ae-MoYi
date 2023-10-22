@@ -4,8 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b5e1c9a7-b28f-4b8b-808f-69d8a2b94d3c" name="更改" comment="修复点击bug">
+    <list default="true" id="b5e1c9a7-b28f-4b8b-808f-69d8a2b94d3c" name="更改" comment="优化格式">
+      <change afterPath="$PROJECT_DIR$/.eslintrc.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Modes.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Modes.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Settings.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Settings.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Tools.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Tools.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,26 +64,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Program Files (x86)/Common Files/Adobe/CEP/extensions/Ai2Ae-MoYi",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "actions.on.save",
-    "ts.external.directory.path": "C:\\Users\\15459\\AppData\\Local\\Programs\\WebStorm\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Program Files (x86)/Common Files/Adobe/CEP/extensions/Ai2Ae-MoYi&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.linters.eslint&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\15459\\AppData\\Local\\Programs\\WebStorm\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\15459\Desktop\Codes\Ai2Ae-MoYi\src\views" />
@@ -178,7 +185,9 @@
       <workItem from="1697888934984" duration="4973000" />
       <workItem from="1697900300508" duration="5128000" />
       <workItem from="1697909573212" duration="5472000" />
-      <workItem from="1697938709956" duration="4777000" />
+      <workItem from="1697938709956" duration="4952000" />
+      <workItem from="1697958820968" duration="1004000" />
+      <workItem from="1697967405072" duration="2872000" />
     </task>
     <task id="LOCAL-00001" summary="创建项目&#10;新增`工具`,`多人协同`,`设置`页面&#10;基础框架搭建完成&#10;基本信息获取">
       <option name="closed" value="true" />
@@ -228,7 +237,23 @@
       <option name="project" value="LOCAL" />
       <updated>1697943739855</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Dev版">
+      <option name="closed" value="true" />
+      <created>1697944104127</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1697944104127</updated>
+    </task>
+    <task id="LOCAL-00008" summary="优化格式">
+      <option name="closed" value="true" />
+      <created>1697944257191</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1697944257191</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -262,6 +287,8 @@
     <MESSAGE value="添加滞留提示,修复Bug" />
     <MESSAGE value="添加复制粘贴功能" />
     <MESSAGE value="修复点击bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="修复点击bug" />
+    <MESSAGE value="Dev版" />
+    <MESSAGE value="优化格式" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化格式" />
   </component>
 </project>

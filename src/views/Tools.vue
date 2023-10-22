@@ -173,19 +173,21 @@ export default {
 
     // TODO 测试2
     Test2() {
+      alert(`translateX: ${this.translateX}, translateY: ${this.translateY}`);
       const csInterface = new CSInterface();
-      const script = `(function(){
-      var selection = app.activeDocument.selection;
-      if (selection.length === 0) {
-          return "没有路径";
-      }
-      for (var i = 0; i < selection.length; i++) {
-          var item = selection[i];
-          if (item.typename === "PathItem") {
-              var duplicatedItem = item.duplicate();
-              duplicatedItem.translate(10, 10);
-          }
-      }
+      const script = `
+      (function(){
+        var selection = app.activeDocument.selection;
+        if (selection.length === 0) {
+            return "没有路径";
+        }
+        for (var i = 0; i < selection.length; i++) {
+            var item = selection[i];
+            if (item.typename === "PathItem") {
+                var duplicatedItem = item.duplicate();
+                duplicatedItem.translate(${this.translateX}, ${this.translateY});
+            }
+        }
         return "已复制路径";
       })()`;
 
