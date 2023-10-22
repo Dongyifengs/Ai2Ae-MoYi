@@ -77,7 +77,6 @@ export default {
   },
   methods: {
     detectApplication() {
-      /* global CSInterface */
       const csInterface = new CSInterface();
       const hostEnv = csInterface.hostEnvironment;
 
