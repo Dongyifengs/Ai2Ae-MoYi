@@ -9,6 +9,7 @@
           <el-button type="primary" size="small" icon="el-icon-upload2" @click="CopyToAe()"/>
         </el-tooltip>
         <el-button type="primary" size="small" icon="el-icon-upload2" @click="Test()">测试</el-button>
+        <el-button type="primary" size="small" icon="el-icon-upload2" @click="Test2()">复制</el-button>
         <el-tooltip content="从Ae从传回" placement="top">
           <el-button type="primary" size="small" icon="el-icon-download" @click="CopyAeToAi()"/>
         </el-tooltip>
@@ -135,8 +136,8 @@ export default {
             const items = app.activeDocument.selection;
             const results = [];
             for (var i = 0; i < items.length; i++) {
-                const item = items[i];
-                const attributes = {
+                var item = items[i];
+                var attributes = {
                     透明度: item.opacity,
                     锚点位置: (item.typename === "PathItem" && item.pathPoints.length > 0) ? item.pathPoints[0].anchor.toString() : "N/A",
                     边框大小: (item.typename === "PathItem") ? item.strokeWidth : "N/A",
@@ -152,7 +153,6 @@ export default {
 
       // TODO 执行脚本
       csInterface.evalScript(script, (result) => {
-        console.log(result)
         console.log(JSON.parse(result));
         if (JSON.parse((result)).length === 0) {
           this.$message({
@@ -166,6 +166,52 @@ export default {
             showClose: true,
             message: '选中了路径.',
             type: 'success',
+            center: true
+          });
+        }
+      });
+    },
+
+    // TODO 测试2
+    Test2() {
+      const csInterface = new CSInterface();
+      const script = `(function(){
+      var selection = app.activeDocument.selection;
+      if (selection.length === 0) {
+          return "没有路径";
+      }
+      for (var i = 0; i < selection.length; i++) {
+          var item = selection[i];
+          if (item.typename === "PathItem") {
+              var duplicatedItem = item.duplicate();
+              duplicatedItem.translate(10, 10);
+          }
+      }
+        return "已复制路径";
+      })()`;
+
+      csInterface.evalScript(script, (result) => {
+        console.log(result);
+
+        if (result === "已复制路径") {
+          this.$message({
+            showClose: true,
+            message: '复制成功',
+            type: 'success',
+            center: true
+          });
+        } else if (result === "没有路径") {
+          this.$message({
+            showClose: true,
+            message: '没有选中的路径.',
+            type: 'warning',
+            center: true
+          });
+        } else {
+          this.$message({
+            showClose: true,
+            message: '操作失败',
+            type: 'error',
             center: true
           });
         }
