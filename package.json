@@ -18,6 +18,7 @@
     "cluecumber": "^0.1.1",
     "core-js": "^3.1.2",
     "element-ui": "^2.15.14",
+    "fingerprintjs2": "^2.1.4",
     "gehenna": "^1.1.4",
     "md5": "^2.3.0",
     "starlette": "^1.0.7",
