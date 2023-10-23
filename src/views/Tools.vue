@@ -198,7 +198,7 @@ export default {
             var item = selection[i];
             if (item.typename === "PathItem") {
                 var duplicatedItem = item.duplicate();
-                duplicatedItem.translate(0, -100);
+                duplicatedItem.translate(${this.translateX}, ${this.translateY});
             }
         }
         return "已复制路径";
