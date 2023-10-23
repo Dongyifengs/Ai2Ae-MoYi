@@ -3,7 +3,7 @@
 
     <div class="ILST" v-if="currentApp === 'ILST'">
       <div class="tools">
-        <h1>当前正在开发 / 多人协同 / Ai页面才能显示</h1>
+        <h2>当前正在开发 / 多人协同 / Ai页面才能显示</h2>
         <div class="youIP">
           <span>当前设备IP：{{ YouLocaIP }}</span><br>
           <div style="margin-top: 5px;">
@@ -29,7 +29,7 @@
     </div>
     <div class="AEFT" v-if="currentApp === 'AEFT'">
       <div class="tools">
-        <h1>当前正在开发 / 多人协同 / Ae页面正常显示</h1>
+        <h2>当前正在开发 / 多人协同 / Ae页面正常显示</h2>
         <div class="youIP">
           <span>当前设备IP：{{ YouLocaIP }}</span><br>
           <div style="margin-top: 5px;">
@@ -62,13 +62,13 @@
 export default {
   data() {
     return {
-      adobeAppName: '未知应用',
-      adobeAppId: '未知ID',
-      adobeAppLocale: '未知语言',
-      adobeAppVersion: '未知版本',
-      currentApp: '未知版本',
-      YouLocaIP: '正在获取IP地址.....',
-      YouToIP: ''
+      adobeAppName: "未知应用",
+      adobeAppId: "未知ID",
+      adobeAppLocale: "未知语言",
+      adobeAppVersion: "未知版本",
+      currentApp: "未知版本",
+      YouLocaIP: "正在获取IP地址.....",
+      YouToIP: ""
     };
   },
   mounted() {
@@ -108,7 +108,7 @@ export default {
     },
     getLocalIP() {
       const pc = new RTCPeerConnection({iceServers: []});
-      pc.createDataChannel('');
+      pc.createDataChannel("");
       pc.createOffer().then(pc.setLocalDescription.bind(pc));
 
       pc.onicecandidate = (ice) => {

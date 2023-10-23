@@ -3,16 +3,31 @@
 
     <div class="ILST" v-if="currentApp === 'ILST'">
       <div class="tools">
-        <h1>当前正在开发 / 多人协同 / Ai页面才能显示</h1>
-        <el-button @click="showValues">显示值</el-button><br>
-        <el-input v-model="translateX" placeholder="请输入宽度" style="width: 200px"></el-input><br>
-        <el-input v-model="translateY" placeholder="请输入高度" style="width: 200px"></el-input><br>
+        <h2>当前正在开发 / 多人协同 / Ai页面才能显示</h2>
       </div>
     </div>
 
     <div class="AEFT" v-if="currentApp === 'AEFT'">
       <div class="tools">
-        <h1>当前正在开发 / 多人协同 / Ae页面正常显示</h1>
+        <h2>当前正在开发 / 多人协同 / Ae页面正常显示</h2>
+      </div>
+    </div>
+
+    <div class="NotVersion" v-if="currentApp === '未知版本'">
+      <div class="settings">
+        <div class="login">
+          <div class="userLogin">
+            <div class="userLoginIcon">
+              <el-avatar :src="userLoginIconImage" alt="用户头像"></el-avatar>
+            </div>
+          </div>
+        </div>
+        <div class="log">
+          <span>当前应用: {{ adobeAppName }}</span><br>
+          <span>当前ID: {{ adobeAppId }}</span><br>
+          <span>当前语言: {{ adobeAppLocale }}</span><br>
+          <span>当前版本: {{ adobeAppVersion }}</span><br>
+        </div>
       </div>
     </div>
 
@@ -20,26 +35,23 @@
 </template>
 
 <script>
+import userLoginIconImage from "@/assets/userLoginIcon.jpg";
 
 export default {
   data() {
     return {
-      adobeAppName: '未知应用',
-      adobeAppId: '未知ID',
-      adobeAppLocale: '未知语言',
-      adobeAppVersion: '未知版本',
-      currentApp: '未知版本',
-      translateX: 0,
-      translateY: -100
+      adobeAppName: "未知应用",
+      adobeAppId: "未知ID",
+      adobeAppLocale: "未知语言",
+      adobeAppVersion: "未知版本",
+      currentApp: "未知版本",
+      userLoginIconImage
     };
   },
   mounted() {
     this.detectApplication();
   },
   methods: {
-    showValues() {
-      alert(`translateX: ${this.translateX}, translateY: ${this.translateY}`);
-    },
     detectApplication() {
       const csInterface = new CSInterface();
       const hostEnv = csInterface.hostEnvironment;
