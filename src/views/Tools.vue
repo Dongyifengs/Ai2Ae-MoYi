@@ -4,12 +4,12 @@
     <!--Ai面板内容-->
     <div v-if="currentApp === 'ILST'" class="ILST">
       <div class="tools">
-        <h1>当前正在开发 / 工具 / Ai页面才能显示</h1>
+        <h2>当前正在开发 / 工具 / Ai页面才能显示</h2>
+        <el-button type="primary" size="small" @click="Test()">测试</el-button>
+        <el-button type="primary" size="small" @click="Test2()">复制</el-button>
         <el-tooltip content="上传到Ae" placement="top">
           <el-button type="primary" size="small" icon="el-icon-upload2" @click="CopyToAe()"/>
         </el-tooltip>
-        <el-button type="primary" size="small" icon="el-icon-upload2" @click="Test()">测试</el-button>
-        <el-button type="primary" size="small" icon="el-icon-upload2" @click="Test2()">复制</el-button>
         <el-tooltip content="从Ae从传回" placement="top">
           <el-button type="primary" size="small" icon="el-icon-download" @click="CopyAeToAi()"/>
         </el-tooltip>
@@ -19,11 +19,24 @@
     <!--Ae面板内容-->
     <div v-if="currentApp === 'AEFT'" class="AEFT">
       <div class="tools">
-        <h1>当前正在开发 / 工具 / Ae页面正常显示</h1>
+        <h2>当前正在开发 / 工具 / Ae页面正常显示</h2>
         <el-tooltip content="上传到Ai" placement="top">
           <el-button type="primary" size="small" icon="el-icon-upload2"/>
         </el-tooltip>
         <el-tooltip content="从Ai从传回" placement="top">
+          <el-button type="primary" size="small" icon="el-icon-download"/>
+        </el-tooltip>
+      </div>
+    </div>
+
+    <!-- 测试UI页面 -->
+    <div v-if="currentApp === '未知版本'" class="NotVersion">
+      <div class="tools">
+        <h2>当前正在开发 / UI设计 / 浏览器正常显示</h2>
+        <el-tooltip content="上传到XX" placement="top">
+          <el-button type="primary" size="small" icon="el-icon-upload2"/>
+        </el-tooltip>
+        <el-tooltip content="从XX从传回" placement="top">
           <el-button type="primary" size="small" icon="el-icon-download"/>
         </el-tooltip>
       </div>
@@ -45,12 +58,12 @@
 export default {
   data() {
     return {
-      adobeAppName: '未知应用',
-      adobeAppId: '未知ID',
-      adobeAppLocale: '未知语言',
-      adobeAppVersion: '未知版本',
-      currentApp: '未知版本',
-      YouLocaIP: '正在获取IP地址.....'
+      adobeAppName: "未知应用",
+      adobeAppId: "未知ID",
+      adobeAppLocale: "未知语言",
+      adobeAppVersion: "未知版本",
+      currentApp: "未知版本",
+      YouLocaIP: "正在获取IP地址....."
     };
   },
   mounted() {
@@ -58,23 +71,23 @@ export default {
     this.getLocalIP();
   },
   methods: {
-    // TODO 获取面板属性
+    // 获取面板属性
     detectApplication() {
       const csInterface = new CSInterface();
       const hostEnv = csInterface.hostEnvironment;
       if (hostEnv) {
         this.adobeAppName = hostEnv.appName === "AEFT" ? "当前应用是 After Effects" : "当前应用是 Illustrator";
         this.currentApp = hostEnv.appName;
-        this.adobeAppId = hostEnv.appId || '未知ID';
-        this.adobeAppLocale = hostEnv.appLocale || '未知语言';
-        this.adobeAppVersion = hostEnv.appVersion || '未知版本';
+        this.adobeAppId = hostEnv.appId || "未知ID";
+        this.adobeAppLocale = hostEnv.appLocale || "未知语言";
+        this.adobeAppVersion = hostEnv.appVersion || "未知版本";
       }
     },
 
-    // TODO 获取电脑IP地址
+    // 获取电脑IP地址
     getLocalIP() {
       const pc = new RTCPeerConnection({iceServers: []});
-      pc.createDataChannel('');
+      pc.createDataChannel("");
       pc.createOffer().then(offer => pc.setLocalDescription(offer));
       pc.onicecandidate = (ice) => {
         if (ice && ice.candidate) {
@@ -85,22 +98,22 @@ export default {
       };
     },
 
-    // TODO 将路径导入到Ae中
+    // 将路径导入到Ae中
     CopyToAe() {
-      console.log("CopyToAe()")
+      console.log("将路径导入到Ae中")
     },
 
-    // TODO 将Ae路径导入到Ai中
+    // 将Ae路径导入到Ai中
     CopyAeToAi() {
-      console.log("CopyAeToAi()")
+      console.log("将Ae路径导入到Ai中")
     },
 
-    // TODO 测试函数
+    // 测试函数
     Test() {
       const csInterface = new CSInterface();
       const script = `(function(){
 
-            // TODO 获取颜色
+            // 获取颜色
             function colorToString(color) {
                 if (color.typename === "CMYKColor") {
                     var r = 255 * (1 - color.cyan / 100) * (1 - color.black / 100);
@@ -121,7 +134,7 @@ export default {
                 }
             }
 
-            // TODO 获取渐变
+            // 获取渐变
             function gradientToString(gradientColor) {
                 var stops = [];
                 for (var j = 0; j < gradientColor.gradient.gradientStops.length; j++) {
@@ -131,12 +144,13 @@ export default {
                 return stops.join(", ");
             }
 
-            // TODO 获取路径各个属性
+            // 获取路径各个属性
             const items = app.activeDocument.selection;
             const results = [];
             for (var i = 0; i < items.length; i++) {
                 var item = items[i];
                 var attributes = {
+                    // 获取属性
                     透明度: item.opacity,
                     锚点位置: (item.typename === "PathItem" && item.pathPoints.length > 0) ? item.pathPoints[0].anchor.toString() : "N/A",
                     边框大小: (item.typename === "PathItem") ? item.strokeWidth : "N/A",
@@ -150,30 +164,29 @@ export default {
             return JSON.stringify(results);
       })()`;
 
-      // TODO 执行脚本
+      // 执行脚本
       csInterface.evalScript(script, (result) => {
         console.log(JSON.parse(result));
         if (JSON.parse((result)).length === 0) {
           this.$message({
             showClose: true,
-            message: '没有选中路径.',
-            type: 'error',
+            message: "没有选中路径.",
+            type: "error",
             center: true
           });
         } else {
           this.$message({
             showClose: true,
-            message: '选中了路径.',
-            type: 'success',
+            message: "选中了路径.",
+            type: "success",
             center: true
           });
         }
       });
     },
 
-    // TODO 测试2
+    // 测试2
     Test2() {
-      alert(`translateX: ${this.translateX}, translateY: ${this.translateY}`);
       const csInterface = new CSInterface();
       const script = `
       (function(){
@@ -185,7 +198,7 @@ export default {
             var item = selection[i];
             if (item.typename === "PathItem") {
                 var duplicatedItem = item.duplicate();
-                duplicatedItem.translate(${this.translateX}, ${this.translateY});
+                duplicatedItem.translate(0, -100);
             }
         }
         return "已复制路径";
@@ -197,22 +210,22 @@ export default {
         if (result === "已复制路径") {
           this.$message({
             showClose: true,
-            message: '复制成功',
-            type: 'success',
+            message: "复制成功",
+            type: "success",
             center: true
           });
         } else if (result === "没有路径") {
           this.$message({
             showClose: true,
-            message: '没有选中的路径.',
-            type: 'warning',
+            message: "没有选中的路径.",
+            type: "warning",
             center: true
           });
         } else {
           this.$message({
             showClose: true,
-            message: '操作失败',
-            type: 'error',
+            message: "操作失败",
+            type: "error",
             center: true
           });
         }
