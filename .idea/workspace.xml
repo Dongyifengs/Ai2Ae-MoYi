@@ -5,8 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b5e1c9a7-b28f-4b8b-808f-69d8a2b94d3c" name="更改" comment="添加npm相关文件">
-      <change afterPath="$PROJECT_DIR$/.github/workflows/build_and_tag.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/userLoginIcon.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/userIcon.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Settings.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Settings.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Tools.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Tools.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,8 +47,8 @@
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
-        <option name="accountId" value="8068c0b7-60e9-4e18-906a-684ef69c3e84" />
-        <option name="url" value="https://github.com/Dongyifengs/Ai2Ae-MoYi.git" />
+        <option name="accountId" value="7861d0ad-4d4d-4a97-96b3-9d116a900adb" />
+        <option name="url" value="https://github.com/Wzp-2008/Ai2Ae-MoYi.git" />
       </UrlAndAccount>
     </option>
   </component>
@@ -72,7 +78,7 @@
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "G:/Projects/WebstormProjects/Ai2Ae-MoYi/src/assets",
+    "last_opened_file_path": "G:/Projects/WebstormProjects/Ai2Ae-MoYi/node_modules/vue/dist",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
@@ -80,8 +86,8 @@
     "node.js.selected.package.standard": "",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "settings.javascript.linters.eslint",
-    "ts.external.directory.path": "C:\\Users\\15459\\AppData\\Local\\Programs\\WebStorm\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+    "settings.editor.selected.configurable": "settings.vue",
+    "ts.external.directory.path": "C:\\Users\\33572\\AppData\\Local\\Programs\\WebStorm\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -190,6 +196,7 @@
       <workItem from="1697967405072" duration="2872000" />
       <workItem from="1698044327861" duration="155000" />
       <workItem from="1698044542758" duration="1692000" />
+      <workItem from="1698144515941" duration="4127000" />
     </task>
     <task id="LOCAL-00001" summary="创建项目&#10;新增`工具`,`多人协同`,`设置`页面&#10;基础框架搭建完成&#10;基本信息获取">
       <option name="closed" value="true" />
