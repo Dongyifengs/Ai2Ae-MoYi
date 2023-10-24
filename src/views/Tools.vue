@@ -1,22 +1,22 @@
 <template>
   <div class="home">
 
-    <!--Ai面板内容-->
+    <!-- Ai面板内容 -->
     <div v-if="currentApp === 'ILST'" class="ILST">
       <div class="tools">
         <h2>当前正在开发 / 工具 / Ai页面才能显示</h2>
-        <el-button type="primary" size="small" @click="Test()">测试</el-button>
-        <el-button type="primary" size="small" @click="Test2()">复制</el-button>
+        <el-button type="primary" size="small" @click="test">测试</el-button>
+        <el-button type="primary" size="small" @click="test2">复制</el-button>
         <el-tooltip content="上传到Ae" placement="top">
-          <el-button type="primary" size="small" icon="el-icon-upload2" @click="CopyToAe()"/>
+          <el-button type="primary" size="small" icon="el-icon-upload2" @click="copyToAe"/>
         </el-tooltip>
         <el-tooltip content="从Ae从传回" placement="top">
-          <el-button type="primary" size="small" icon="el-icon-download" @click="CopyAeToAi()"/>
+          <el-button type="primary" size="small" icon="el-icon-download" @click="copyAeToAi"/>
         </el-tooltip>
       </div>
     </div>
 
-    <!--Ae面板内容-->
+    <!-- Ae面板内容 -->
     <div v-if="currentApp === 'AEFT'" class="AEFT">
       <div class="tools">
         <h2>当前正在开发 / 工具 / Ae页面正常显示</h2>
@@ -42,13 +42,13 @@
       </div>
     </div>
 
-    <!--Log面板内容-->
+    <!-- Log面板内容 -->
     <div class="log">
       <span>当前应用: {{ adobeAppName }}</span><br>
       <span>当前ID: {{ adobeAppId }}</span><br>
       <span>当前语言: {{ adobeAppLocale }}</span><br>
       <span>当前版本: {{ adobeAppVersion }}</span><br>
-      <span>当前IP: {{ YouLocaIP }}</span><br>
+      <span>当前IP: {{ localIP }}</span><br>
     </div>
 
   </div>
@@ -63,7 +63,7 @@ export default {
       adobeAppLocale: "未知语言",
       adobeAppVersion: "未知版本",
       currentApp: "未知版本",
-      YouLocaIP: "正在获取IP地址....."
+      localIP: "正在获取IP地址....."
     };
   },
   mounted() {
@@ -71,7 +71,6 @@ export default {
     this.getLocalIP();
   },
   methods: {
-    // 获取面板属性
     detectApplication() {
       const csInterface = new CSInterface();
       const hostEnv = csInterface.hostEnvironment;
